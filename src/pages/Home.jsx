@@ -40,23 +40,12 @@ export default function Home() {
 
             <aside className="hero-aside" aria-label="Resumen del local">
               <div className="hero-aside-card">
-                <span className="hero-aside-tag">Sanducheria artesanal</span>
+                <span className="hero-aside-tag">La casa del sanduche</span>
                 <h2>{business.name}</h2>
-                <p>{business.slogan}</p>
-                <div className="hero-aside-list">
-                  <div>
-                    <span>Direccion</span>
-                    <strong>{business.address}</strong>
-                  </div>
-                  <div>
-                    <span>Horario</span>
-                    <strong>{business.schedule}</strong>
-                  </div>
-                  <div>
-                    <span>WhatsApp</span>
-                    <strong>{business.phoneDisplay}</strong>
-                  </div>
-                </div>
+                <p className="hero-aside-quote">
+                  "Pan artesanal, ingredientes frescos y sabor que hace volver."
+                </p>
+                <strong className="hero-aside-sign">{business.city}, {business.country}</strong>
               </div>
             </aside>
           </div>
