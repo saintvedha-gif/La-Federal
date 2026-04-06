@@ -1,4 +1,5 @@
 import { siteData } from "../data/siteData";
+import Twemoji from "./Twemoji";
 
 export default function Footer() {
   const { business } = siteData;
@@ -56,8 +57,14 @@ export default function Footer() {
           </div>
 
           <div className="site-footer-contact">
-            <span>📞 {business.phoneDisplay}</span>
-            <span>📍 {business.address}</span>
+            <span>
+              <Twemoji emoji="📞" label="Telefono" className="twemoji twemoji-inline" />
+              {business.phoneDisplay}
+            </span>
+            <span>
+              <Twemoji emoji="📍" label="Ubicacion" className="twemoji twemoji-inline" />
+              {business.address}
+            </span>
           </div>
         </div>
       </div>

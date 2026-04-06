@@ -26,7 +26,7 @@ export const siteData = {
       titleTop: "LA",
       titleAccent: "FEDERAL",
       subtitle: "Sanducheria Artesanal",
-      info: "Olvidate de lo de siempre 🔥 En La Federal cocinamos para los que saben que el secreto esta en la calidad y en los detalles ✨ Un parche con estilo, ingredientes de verdad y el sazon que te mereces 😮‍💨 Porque un sanduche asi de melo no se encuentra en cualquier esquina; se disfruta aqui, con nosotros 🥪",
+      info: "Olvidate de lo de siempre  En La Federal cocinamos para los que saben que el secreto esta en la calidad y en los detalles  Un parche con estilo, ingredientes de verdad y el sazon que te mereces  Porque un sanduche asi de melo no se encuentra en cualquier esquina; se disfruta aqui, con nosotros 🥪",
       primaryCta: { label: "Ver Menu Completo", to: "/menu" },
       secondaryCta: { label: "Contactanos", to: "/contacto" }
     },

@@ -1,4 +1,5 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import About from "./pages/About";
@@ -13,14 +14,28 @@ const appRoutes = [
   { path: "/contacto", element: <Contact /> }
 ];
 
-export default function App() {
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
+
   return (
-    <HashRouter>
-      <Routes>
+    <div key={location.pathname} className="route-transition">
+      <Routes location={location}>
         {appRoutes.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
       </Routes>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <HashRouter>
+      <AnimatedRoutes />
     </HashRouter>
   );
 }

@@ -6,6 +6,7 @@ import { useRevealAnimations } from "../hooks/useRevealAnimations";
 import FloatingCart from "../components/FloatingCart";
 import Footer from "../components/Footer";
 import { useCart } from "../hooks/useCart";
+import Twemoji from "../components/Twemoji";
 import {
   getAdditionalOptions,
   getVisibleCategories,
@@ -50,7 +51,9 @@ export default function Menu() {
               className={`tab ${active === category.id ? "active" : ""}`}
               onClick={() => setActive(category.id)}
             >
-              <span className="tab-icon" aria-hidden="true">{categoryIconMap[category.id] || "•"}</span>
+              <span className="tab-icon" aria-hidden="true">
+                <Twemoji emoji={categoryIconMap[category.id] || "🍽️"} label={category.label} className="twemoji twemoji-tab" />
+              </span>
               <span className="tab-label">{category.label}</span>
             </button>
           ))}
