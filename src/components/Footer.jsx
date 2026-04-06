@@ -46,7 +46,9 @@ export default function Footer() {
 
             {/* Instagram placeholder */}
             <a
-              href="#"
+              href="https://www.instagram.com/lafederal.co?igsh=Y2oyaWJsd21uZGNp"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Instagram"
               className="site-footer-icon"
             >
