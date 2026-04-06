@@ -54,7 +54,6 @@ export default function Home() {
             <div className="home-neo-chips" data-animate data-delay="2">
               <span>Sanduches artesanales</span>
               <span>Cocina al momento</span>
-              <span>{business.schedule}</span>
             </div>
           </div>
 
@@ -64,8 +63,6 @@ export default function Home() {
               <Twemoji emoji="🥪" label="Sanduche" className="twemoji home-neo-sandwich-emoji" />
             </div>
             <div className="home-neo-core">F E D E R A L</div>
-            <p>Abierto todos los dias</p>
-            <strong>4:30 pm - 10:30 pm</strong>
           </aside>
         </div>
       </section>
@@ -106,7 +103,7 @@ export default function Home() {
         </div>
 
         <div className="section-inner home-neo-band-inner" data-animate>
-          <h2 className="title-slide-glow">Moderno por fuera, brutal por dentro.</h2>
+          <h2 className="title-slide-glow">No es solo un sanduche, es el momento más melo de tu día.</h2>
           <div className="home-neo-actions home-neo-actions-center">
             <Link to="/menu" className="btn btn-gold">Explorar carta</Link>
             <Link to="/contacto" className="btn home-neo-btn-ghost">Como llegar</Link>

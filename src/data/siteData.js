@@ -43,7 +43,7 @@ export const siteData = {
     titleAccent: "se queda",
     body: "En La Federal creemos que un buen sanduche es un acto de amor: pan artesanal, ingredientes frescos y salsas de autor preparadas cada dia en Cucuta.",
     stats: [
-      { value: "14+", label: "Sanduches artesanales" },
+      { value: "14", label: "Opciones artesanales" },
       { value: "7", label: "Dias a la semana" },
       { value: "501", label: "Seguidores fieles" },
       { value: "Infinito", label: "Sabor garantizado" }
