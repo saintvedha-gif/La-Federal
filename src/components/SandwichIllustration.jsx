@@ -1,61 +1,73 @@
 export default function SandwichIllustration({ className = "" }) {
   return (
     <svg
-      viewBox="0 0 340 320"
+      viewBox="0 0 280 320"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-hidden="true"
     >
-      {/* 1. Sombra base en el piso */}
-      <ellipse cx="170" cy="285" rx="120" ry="18" fill="rgba(0,0,0,0.12)" />
+      {/* Sombra */}
+      <ellipse cx="140" cy="295" rx="90" ry="12" fill="rgba(0,0,0,0.15)" />
 
-      {/* Grupo Principal de Sánduche - Coordenadas Isométricas */}
-      <g transform="translate(170, 150)">
-        
-        {/* --- PAN INFERIOR (TAPA DE ABAJO) --- */}
-        {/* Grosor de la corteza inferior */}
-        <path d="M-105,35 Q-105,25 -85,20 L15,20 Q35,25 35,35 L35,65 Q35,80 15,85 L-85,85 Q-105,80 -105,65 Z" fill="#7B4A21" />
-        {/* Cara superior de la tapa inferior (miga) */}
-        <path d="M-105,35 Q-105,25 -85,20 L15,20 Q35,25 35,35 L35,60 Q35,75 15,80 L-85,80 Q-105,75 -105,60 Z" fill="#F4CC82" stroke="#6e431f" strokeWidth="4" />
+      {/* PAN INFERIOR */}
+      <g>
+        {/* Sombra del pan */}
+        <path d="M60 200 Q50 190 50 170 Q50 150 80 145 L200 145 Q230 150 230 170 Q230 190 220 200" fill="#6B3410" />
+        {/* Pan miga */}
+        <path d="M60 190 Q50 185 50 170 Q50 155 80 150 L200 150 Q230 160 230 175 Q230 190 220 195" fill="#E8C66E" stroke="#8B5A2B" strokeWidth="3" />
+        {/* Detalle de textura */}
+        <ellipse cx="140" cy="168" rx="70" ry="8" fill="rgba(255,255,255,0.2)" />
+      </g>
 
-        {/* --- CARNE INFERIOR (2 rodajas de salami superpuestas) --- */}
-        <g transform="translate(0, -5)">
-          {/* Sombra de la rodaja izquierda */}
-          <ellipse cx="-60" cy="30" rx="30" ry="8" fill="#8B3A3A" />
-          {/* Cara de la rodaja izquierda */}
-          <ellipse cx="-60" cy="25" rx="30" ry="8" fill="#B84535" stroke="#63211A" strokeWidth="3" />
-          {/* Sombra de la rodaja derecha */}
-          <ellipse cx="-10" cy="40" rx="30" ry="8" fill="#8B3A3A" />
-          {/* Cara de la rodaja derecha */}
-          <ellipse cx="-10" cy="35" rx="30" ry="8" fill="#B84535" stroke="#63211A" strokeWidth="3" />
-        </g>
+      {/* INGREDIENTES DEL MEDIO */}
+      
+      {/* LECHUGA 1 (verde claro) */}
+      <g>
+        <path d="M45 150 Q60 135 80 138 Q110 140 140 132 Q170 140 200 138 Q220 135 235 150 L235 162 Q220 170 140 175 Q60 170 45 162 Z" fill="#6FBC3A" stroke="#4A7D2B" strokeWidth="2.5" />
+        <path d="M60 145 Q80 138 110 140 Q140 135 170 140 Q190 138 220 145" stroke="#4A7D2B" strokeWidth="1.5" fill="none" opacity="0.6" />
+      </g>
 
-        {/* --- QUESO (Con las puntas colgantes) --- */}
-        <path d="M-100,5 L50,5 L65,35 L30,25 L0,45 L-40,25 L-110,40 Z" fill="#FFD60A" stroke="#B8860B" strokeWidth="3" strokeLinejoin="round" />
+      {/* CARNE ROJA 1 (jamón/salami) */}
+      <g>
+        <path d="M50 155 Q65 145 85 148 Q115 145 140 140 Q165 145 195 148 Q215 145 230 155 L230 166 Q215 175 140 180 Q65 175 50 166 Z" fill="#E74C3C" stroke="#A92E1F" strokeWidth="2.5" />
+        <ellipse cx="85" cy="157" rx="8" ry="3" fill="rgba(255,255,255,0.15)" />
+        <ellipse cx="195" cy="157" rx="8" ry="3" fill="rgba(255,255,255,0.15)" />
+      </g>
 
-        {/* --- LECHUGA INFERIOR --- */}
-        <path d="M-110,25 Q-90,10 -60,20 Q-30,30 0,20 Q30,10 55,25 L50,35 Q20,25 -10,35 Q-40,45 -80,35 Z" fill="#5C8B3B" stroke="#2D4C1E" strokeWidth="3" />
+      {/* LECHUGA 2 (verde más oscuro) */}
+      <g>
+        <path d="M48 162 Q65 150 88 153 Q120 150 140 145 Q160 150 192 153 Q215 150 232 162 L232 174 Q215 183 140 188 Q65 183 48 174 Z" fill="#7ECC49" stroke="#4A7D2B" strokeWidth="2.5" />
+        <path d="M65 158 Q85 152 115 154 Q140 150 165 154 Q195 152 215 158" stroke="#4A7D2B" strokeWidth="1.5" fill="none" opacity="0.6" />
+      </g>
 
-        {/* --- CARNE SUPERIOR (1 rodaja central) --- */}
-        <ellipse cx="-15" cy="5" rx="30" ry="8" fill="#8B3A3A" transform="translate(0, 15)"/>
-        <ellipse cx="-15" cy="0" rx="30" ry="8" fill="#B84535" stroke="#63211A" strokeWidth="3" transform="translate(0, 15)"/>
+      {/* QUESO (amarillo) */}
+      <g>
+        <path d="M55 170 Q70 160 95 163 Q125 160 140 156 Q155 160 185 163 Q210 160 225 170 L225 182 Q210 191 140 196 Q70 191 55 182 Z" fill="#FFE45C" stroke="#D4A520" strokeWidth="2.5" />
+        <path d="M70 168 Q90 162 120 164 Q140 160 160 164 Q190 162 210 168" stroke="#D4A520" strokeWidth="1.5" fill="none" opacity="0.5" />
+      </g>
 
-        {/* --- LECHUGA SUPERIOR --- */}
-        <g transform="translate(0, -25)">
-          <path d="M-110,25 Q-90,10 -60,20 Q-30,30 0,20 Q30,10 55,25 L50,35 Q20,25 -10,35 Q-40,45 -80,35 Z" fill="#76B041" stroke="#2D4C1E" strokeWidth="3" />
-        </g>
+      {/* CARNE ROJA 2 (jamón/salami más oscuro) */}
+      <g>
+        <path d="M52 177 Q68 167 90 170 Q122 167 140 162 Q158 167 190 170 Q212 167 228 177 L228 188 Q212 197 140 202 Q68 197 52 188 Z" fill="#C0392B" stroke="#8B2E1F" strokeWidth="2.5" />
+        <ellipse cx="90" cy="178" rx="8" ry="3" fill="rgba(255,255,255,0.12)" />
+        <ellipse cx="190" cy="178" rx="8" ry="3" fill="rgba(255,255,255,0.12)" />
+      </g>
 
-        {/* --- PAN SUPERIOR (TAPA TIPO DOMO/BRIOCHE) --- */}
-        <g transform="translate(0, -35)">
-          {/* Grosor de la corteza superior */}
-          <path d="M-105,-40 Q-105,-80 -35,-80 Q35,-80 35,-40 L35,0 Q35,15 15,20 L-85,20 Q-105,15 -105,0 Z" fill="#7B4A21" />
-          {/* Cara frontal/miga del pan superior */}
-          <path d="M-105,-40 Q-105,-75 -35,-75 Q35,-75 35,-40 L35,-10 Q35,5 15,10 L-85,10 Q-105,5 -105,-10 Z" fill="#F4CC82" stroke="#6e431f" strokeWidth="4" />
-          {/* Brillo superior tipo cartoon */}
-          <path d="M-80,-55 Q-35,-65 10,-55" stroke="white" strokeWidth="6" strokeLinecap="round" opacity="0.3" />
-        </g>
+      {/* PAN SUPERIOR */}
+      <g>
+        {/* Pan miga */}
+        <path d="M70 180 Q55 175 55 155 Q55 130 85 120 L195 120 Q225 130 225 155 Q225 175 210 180" fill="#E8C66E" stroke="#8B5A2B" strokeWidth="3" />
+        {/* Sombra superior */}
+        <path d="M75 168 Q80 140 85 125 L195 125 Q200 140 205 168" fill="#6B3410" opacity="0.4" />
+        {/* Brillo */}
+        <ellipse cx="140" cy="130" rx="55" ry="10" fill="white" opacity="0.25" />
+      </g>
 
+      {/* Contorno general del sándwich */}
+      <g fill="none" stroke="#8B5A2B" strokeWidth="3" pointerEvents="none">
+        <path d="M70 180 Q55 175 55 155 Q55 130 85 120 L195 120 Q225 130 225 155 Q225 175 210 180" />
+        <path d="M60 190 Q50 185 50 170 Q50 155 80 150 L200 150 Q230 160 230 175 Q230 190 220 195" />
       </g>
     </svg>
   );
