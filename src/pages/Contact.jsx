@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { siteData } from "../data/siteData";
 import { useRevealAnimations } from "../hooks/useRevealAnimations";
 import {
@@ -111,6 +112,7 @@ export default function Contact() {
           </section>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

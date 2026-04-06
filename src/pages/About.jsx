@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { siteData } from "../data/siteData";
 import { useRevealAnimations } from "../hooks/useRevealAnimations";
 
@@ -43,6 +44,7 @@ export default function About() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

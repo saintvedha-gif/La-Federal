@@ -1,13 +1,8 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { siteData } from "../data/siteData";
-
-const iconMap = {
-  Pan: "🍞",
-  Fresh: "🥩",
-  Time: "🕐",
-  Pin: "📍"
-};
+import SandwichIllustration from "../components/SandwichIllustration";
 
 export default function Home() {
   const { business, home } = siteData;
@@ -20,11 +15,7 @@ export default function Home() {
           <div className="hero-layout">
             <div className="hero-copy">
               <p className="hero-eyebrow">{home.hero.eyebrow}</p>
-              <h1 className="hero-title">
-                {home.hero.titleTop}
-                <br />
-                <em>{home.hero.titleAccent}</em>
-              </h1>
+              <h1 className="hero-title">{home.hero.titleTop} {home.hero.titleAccent}</h1>
               <p className="hero-subtitle">{home.hero.subtitle}</p>
               <div className="hero-divider" />
               <p className="hero-info">{home.hero.info}</p>
@@ -38,35 +29,14 @@ export default function Home() {
               </div>
             </div>
 
-            <aside className="hero-aside" aria-label="Resumen del local">
-              <div className="hero-aside-card">
-                <span className="hero-aside-tag">La casa del sanduche</span>
-                <h2>{business.name}</h2>
-                <p className="hero-aside-quote">
-                  "Pan artesanal, ingredientes frescos y sabor que hace volver."
-                </p>
-                <strong className="hero-aside-sign">{business.city}, {business.country}</strong>
-              </div>
-            </aside>
+            <div className="hero-img-wrap">
+              <SandwichIllustration className="hero-sandwich" />
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="strip">
-        {home.highlights.map((item) => (
-          <div className="strip-item" key={item.label}>
-            <div className="strip-icon" aria-hidden="true">{iconMap[item.icon] || "•"}</div>
-            <div className="strip-label">{item.label}</div>
-            <div className="strip-sub">{item.sub}</div>
-          </div>
-        ))}
-      </div>
-
-      <footer>
-        <p>
-          (c) 2026 <span>{business.name} {business.subtitle}</span> - {business.city}, {business.country} - Todos los derechos reservados
-        </p>
-      </footer>
+      <Footer />
     </>
   );
 }

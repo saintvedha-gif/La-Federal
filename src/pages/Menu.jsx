@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { siteData } from "../data/siteData";
 import { useRevealAnimations } from "../hooks/useRevealAnimations";
 import FloatingCart from "../components/FloatingCart";
+import Footer from "../components/Footer";
 import { useCart } from "../hooks/useCart";
 import {
   getAdditionalOptions,
@@ -85,11 +86,7 @@ export default function Menu() {
         )}
       </main>
 
-      <footer>
-        <p>
-          (c) 2026 <span>{siteData.business.name} {siteData.business.subtitle}</span> - {siteData.business.city}, {siteData.business.country}
-        </p>
-      </footer>
+      <Footer />
 
       <FloatingCart
         cart={cart}
