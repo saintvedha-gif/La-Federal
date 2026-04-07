@@ -61,12 +61,45 @@ export function useCart() {
     setCart({});
   }
 
+  function updateItemAdditions(key, nextAdditions = []) {
+    setCart((prev) => {
+      const current = prev[key];
+      if (!current) {
+        return prev;
+      }
+
+      const next = { ...prev };
+      delete next[key];
+
+      const rebuilt = buildCartItem(
+        {
+          name: current.name,
+          price: current.price,
+          desc: current.desc
+        },
+        nextAdditions
+      );
+
+      if (next[rebuilt.key]) {
+        next[rebuilt.key] = {
+          ...next[rebuilt.key],
+          qty: next[rebuilt.key].qty + current.qty
+        };
+      } else {
+        next[rebuilt.key] = { ...rebuilt, qty: current.qty };
+      }
+
+      return next;
+    });
+  }
+
   return {
     cart,
     addToCart,
     removeFromCart,
     deleteFromCart,
     clearCart,
+    updateItemAdditions,
     getProductQty: (productName) => getCartCountForProduct(cart, productName)
   };
 }

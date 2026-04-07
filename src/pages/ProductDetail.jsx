@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import FloatingCart from "../components/FloatingCart";
@@ -19,10 +19,18 @@ export default function ProductDetail() {
   const { categoryId, productSlug } = useParams();
   const { category, product } = findProductBySlug(categoryId, productSlug);
   const additionalOptions = getAdditionalOptions();
-  const { cart, addToCart, removeFromCart, deleteFromCart, clearCart } = useCart();
+  const { cart, addToCart, removeFromCart, deleteFromCart, clearCart, updateItemAdditions } = useCart();
   const [selectedAdditions, setSelectedAdditions] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [addedOk, setAddedOk] = useState(false);
+  const addedTimerRef = useRef(null);
   useRevealAnimations();
+
+  useEffect(() => () => {
+    if (addedTimerRef.current) {
+      clearTimeout(addedTimerRef.current);
+    }
+  }, []);
 
   if (!category || !product) {
     return (
@@ -68,8 +76,26 @@ export default function ProductDetail() {
   const unitPreview = parsePrice(product.price) + additionsTotal;
   const totalPreview = unitPreview * quantity;
 
+  function handleAddToCart() {
+    addToCart(product, selectedAdditions, quantity);
+    setSelectedAdditions({});
+    setQuantity(1);
+    setAddedOk(true);
+
+    if (addedTimerRef.current) {
+      clearTimeout(addedTimerRef.current);
+    }
+
+    addedTimerRef.current = setTimeout(() => {
+      setAddedOk(false);
+    }, 1800);
+  }
+
   return (
     <div className="menu-container">
+      <p className={`product-added-toast${addedOk ? " is-visible" : ""}`} role="status" aria-live="polite">
+        Agregado con exito
+      </p>
       <Navbar />
 
       <section className="section-inner product-detail-shell">
@@ -133,7 +159,7 @@ export default function ProductDetail() {
             <button
               type="button"
               className="btn btn-primary product-detail-add-btn"
-              onClick={() => addToCart(product, selectedAdditions, quantity)}
+              onClick={handleAddToCart}
             >
               Agregar al carrito
             </button>
@@ -147,6 +173,7 @@ export default function ProductDetail() {
         onRemove={removeFromCart}
         onDelete={deleteFromCart}
         onClear={clearCart}
+        onUpdateAdditions={updateItemAdditions}
       />
     </div>
   );

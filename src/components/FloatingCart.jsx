@@ -5,7 +5,7 @@ function formatCOP(amount) {
   return "$" + amount.toLocaleString("es-CO");
 }
 
-export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear }) {
+export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear, onUpdateAdditions }) {
   const [open, setOpen] = useState(false);
   const items = Object.values(cart);
   const totalItems = items.reduce((s, i) => s + i.qty, 0);
@@ -28,6 +28,23 @@ export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear 
       "Por favor confirmar disponibilidad. ¡Gracias!"
     ].join("\n");
     return `https://wa.me/${siteData.business.phoneRaw}?text=${encodeURIComponent(msg)}`;
+  }
+
+  function updateAdditionQty(item, additionName, delta) {
+    const updated = (item.additions || [])
+      .map((addition) => (
+        addition.name === additionName
+          ? { ...addition, qty: Math.max(0, addition.qty + delta) }
+          : addition
+      ))
+      .filter((addition) => addition.qty > 0);
+
+    onUpdateAdditions(item.key, updated);
+  }
+
+  function removeAddition(item, additionName) {
+    const updated = (item.additions || []).filter((addition) => addition.name !== additionName);
+    onUpdateAdditions(item.key, updated);
   }
 
   return (
@@ -62,17 +79,49 @@ export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear 
                     <div className="cart-item-info">
                       <div className="cart-item-copy">
                         <span className="cart-item-name">{item.name}</span>
-                        {item.additions?.length > 0 && (
-                          <span className="cart-item-additions">
-                            + {item.additions.map((addition) => `${addition.name} x${addition.qty}`).join(", ")}
-                          </span>
-                        )}
                       </div>
                       <span className="cart-item-subtotal">
                         {formatCOP(item.unitTotal * item.qty)}
                       </span>
                     </div>
+                    {item.additions?.length > 0 && (
+                      <div className="cart-additions-editor">
+                        {item.additions.map((addition) => (
+                          <div className="cart-addition-row" key={`${item.key}__${addition.name}`}>
+                            <div className="cart-addition-copy">
+                              <span>{addition.name}</span>
+                              <strong>{addition.price}</strong>
+                            </div>
+                            <div className="cart-addition-actions">
+                              <button
+                                className="cart-qty-btn"
+                                onClick={() => updateAdditionQty(item, addition.name, -1)}
+                                aria-label={`Quitar adicional ${addition.name}`}
+                              >
+                                −
+                              </button>
+                              <span className="cart-qty">{addition.qty}</span>
+                              <button
+                                className="cart-qty-btn"
+                                onClick={() => updateAdditionQty(item, addition.name, 1)}
+                                aria-label={`Agregar adicional ${addition.name}`}
+                              >
+                                +
+                              </button>
+                              <button
+                                className="cart-delete-btn"
+                                onClick={() => removeAddition(item, addition.name)}
+                                aria-label={`Eliminar adicional ${addition.name}`}
+                              >
+                                Quitar
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     <div className="cart-qty-row">
+                      <span className="cart-qty-row-label">Cantidad del producto</span>
                       <button
                         className="cart-qty-btn"
                         onClick={() => onRemove(item.key)}

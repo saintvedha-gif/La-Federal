@@ -39,7 +39,6 @@ body {
 
 .route-transition {
   animation: pageSwapIn 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
-  will-change: opacity, transform, filter, clip-path;
 }
 
 a {
@@ -1948,6 +1947,35 @@ a {
   width: 100%;
 }
 
+.product-added-toast {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.96);
+  z-index: 1200;
+  margin: 0;
+  padding: 0.82rem 1.15rem;
+  min-width: min(86vw, 260px);
+  border-radius: 0.9rem;
+  border: 1px solid rgba(11, 149, 55, 0.35);
+  background: rgba(255, 252, 246, 0.98);
+  color: #0f6d2f;
+  box-shadow: 0 14px 28px rgba(41, 25, 14, 0.22);
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.product-added-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .product-not-found {
   padding: 1.5rem;
   display: grid;
@@ -2469,11 +2497,68 @@ footer span {
   white-space: nowrap;
 }
 
+.cart-additions-editor {
+  border-top: 1px dashed rgba(94, 57, 27, 0.18);
+  margin-top: 0.45rem;
+  padding-top: 0.5rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.cart-addition-row {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.cart-addition-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-addition-copy span {
+  color: var(--tan);
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+
+.cart-addition-copy strong {
+  color: var(--rust);
+  font-size: 0.75rem;
+  font-family: "Josefin Sans", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.cart-addition-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  order: 1;
+}
+
+.cart-addition-actions .cart-delete-btn {
+  margin-left: auto;
+}
+
 .cart-qty-row {
   display: flex;
   align-items: center;
   gap: 0.65rem;
   flex-wrap: wrap;
+  border-top: 1px dashed rgba(94, 57, 27, 0.18);
+  margin-top: 0.55rem;
+  padding-top: 0.55rem;
+}
+
+.cart-qty-row-label {
+  width: 100%;
+  color: var(--tan);
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .cart-qty-btn {

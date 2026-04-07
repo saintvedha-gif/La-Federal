@@ -28,7 +28,7 @@ export default function Menu() {
   const visibleCategories = getVisibleCategories();
   const [active, setActive] = useState(visibleCategories[0]?.id || "");
   const selectedCategory = visibleCategories.find((category) => category.id === active);
-  const { cart, addToCart, removeFromCart, deleteFromCart, clearCart } = useCart();
+  const { cart, addToCart, removeFromCart, deleteFromCart, clearCart, updateItemAdditions } = useCart();
   useRevealAnimations();
 
   return (
@@ -97,6 +97,7 @@ export default function Menu() {
         onRemove={removeFromCart}
         onDelete={deleteFromCart}
         onClear={clearCart}
+        onUpdateAdditions={updateItemAdditions}
       />
     </div>
   );
