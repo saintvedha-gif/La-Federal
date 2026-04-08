@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { siteData } from "../data/siteData";
 import { isOpenNow } from "../utils/businessHours";
 
 export default function Navbar() {
-  const location = useLocation();
   const { business, navigation, contact } = siteData;
   const [openNow, setOpenNow] = useState(() => isOpenNow(contact.weeklyHours || []));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,14 +15,10 @@ export default function Navbar() {
     return () => clearInterval(timer);
   }, [contact.weeklyHours]);
 
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
-
   return (
     <nav className={`navbar${isMenuOpen ? " is-menu-open" : ""}`}>
       <div className="navbar-top">
-        <Link className="nav-logo" to="/">{business.name}</Link>
+        <Link className="nav-logo" to="/" onClick={() => setIsMenuOpen(false)}>{business.name}</Link>
         <button
           type="button"
           className="nav-toggle"
@@ -43,6 +38,7 @@ export default function Navbar() {
               to={item.to}
               className={({ isActive }) => (isActive ? "is-active" : "")}
               end={item.to === "/"}
+              onClick={() => setIsMenuOpen(false)}
             >
               {item.label}
             </NavLink>

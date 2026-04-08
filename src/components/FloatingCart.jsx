@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { siteData } from "../data/siteData";
 
 function formatCOP(amount) {
@@ -7,9 +7,20 @@ function formatCOP(amount) {
 
 export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear, onUpdateAdditions }) {
   const [open, setOpen] = useState(false);
-  const items = Object.values(cart);
+  const items = Object.values(cart).sort((a, b) => (a.addedAt || 0) - (b.addedAt || 0));
   const totalItems = items.reduce((s, i) => s + i.qty, 0);
   const totalPrice = items.reduce((s, i) => s + i.unitTotal * i.qty, 0);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    if (open) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
 
   function buildWhatsAppUrl() {
     const lines = items.map((item) => {
@@ -49,6 +60,7 @@ export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear,
 
   return (
     <div className="cart-float">
+      {open && <button type="button" className="cart-backdrop" onClick={() => setOpen(false)} aria-label="Cerrar carrito" />}
       {open && (
         <div className="cart-panel" role="dialog" aria-modal="true" aria-label="Tu pedido">
           <div className="cart-panel-head">
@@ -76,16 +88,44 @@ export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear,
               <ul className="cart-list">
                 {items.map((item) => (
                   <li key={item.key} className="cart-item">
-                    <div className="cart-item-info">
+                    <div className="cart-item-head">
                       <div className="cart-item-copy">
                         <span className="cart-item-name">{item.name}</span>
+                        <span className="cart-item-base">Base x{item.qty}</span>
                       </div>
                       <span className="cart-item-subtotal">
                         {formatCOP(item.unitTotal * item.qty)}
                       </span>
                     </div>
+
+                    <div className="cart-item-actions">
+                      <button
+                        className="cart-qty-btn"
+                        onClick={() => onRemove(item.key)}
+                        aria-label={`Quitar uno de ${item.name}`}
+                      >
+                        −
+                      </button>
+                      <span className="cart-qty">{item.qty}</span>
+                      <button
+                        className="cart-qty-btn"
+                        onClick={() => onAdd(item)}
+                        aria-label={`Agregar otro ${item.name}`}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="cart-delete-btn cart-item-delete"
+                        onClick={() => onDelete(item.key)}
+                        aria-label={`Eliminar ${item.name} del carrito`}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+
                     {item.additions?.length > 0 && (
                       <div className="cart-additions-editor">
+                        <div className="cart-additions-title">Adicionales</div>
                         {item.additions.map((addition) => (
                           <div className="cart-addition-row" key={`${item.key}__${addition.name}`}>
                             <div className="cart-addition-copy">
@@ -120,31 +160,6 @@ export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear,
                         ))}
                       </div>
                     )}
-                    <div className="cart-qty-row">
-                      <span className="cart-qty-row-label">Cantidad del producto</span>
-                      <button
-                        className="cart-qty-btn"
-                        onClick={() => onRemove(item.key)}
-                        aria-label={`Quitar uno de ${item.name}`}
-                      >
-                        −
-                      </button>
-                      <span className="cart-qty">{item.qty}</span>
-                      <button
-                        className="cart-qty-btn"
-                        onClick={() => onAdd(item)}
-                        aria-label={`Agregar otro ${item.name}`}
-                      >
-                        +
-                      </button>
-                      <button
-                        className="cart-delete-btn"
-                        onClick={() => onDelete(item.key)}
-                        aria-label={`Eliminar ${item.name} del carrito`}
-                      >
-                        Eliminar
-                      </button>
-                    </div>
                   </li>
                 ))}
               </ul>

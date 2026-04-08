@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import FloatingCart from "../components/FloatingCart";
 import { useCart } from "../hooks/useCart";
 import { useRevealAnimations } from "../hooks/useRevealAnimations";
@@ -175,6 +176,7 @@ export default function ProductDetail() {
         onClear={clearCart}
         onUpdateAdditions={updateItemAdditions}
       />
+      <Footer />
     </div>
   );
 }

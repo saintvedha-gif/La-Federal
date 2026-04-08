@@ -33,7 +33,7 @@ export function useCart() {
       ...prev,
       [cartItem.key]: prev[cartItem.key]
         ? { ...prev[cartItem.key], qty: prev[cartItem.key].qty + quantity }
-        : { ...cartItem, qty: quantity }
+        : { ...cartItem, qty: quantity, addedAt: Date.now() }
     }));
   }
 
@@ -80,13 +80,17 @@ export function useCart() {
         nextAdditions
       );
 
-      if (next[rebuilt.key]) {
+      const existing = next[rebuilt.key];
+      const addedAt = existing?.addedAt ?? current.addedAt ?? Date.now();
+
+      if (existing) {
         next[rebuilt.key] = {
-          ...next[rebuilt.key],
-          qty: next[rebuilt.key].qty + current.qty
+          ...existing,
+          qty: existing.qty + current.qty,
+          addedAt
         };
       } else {
-        next[rebuilt.key] = { ...rebuilt, qty: current.qty };
+        next[rebuilt.key] = { ...rebuilt, qty: current.qty, addedAt };
       }
 
       return next;

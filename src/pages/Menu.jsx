@@ -8,7 +8,6 @@ import Footer from "../components/Footer";
 import { useCart } from "../hooks/useCart";
 import Twemoji from "../components/Twemoji";
 import {
-  getAdditionalOptions,
   getVisibleCategories,
   slugify
 } from "../utils/menuCart";
@@ -23,8 +22,6 @@ const categoryIconMap = {
 };
 
 export default function Menu() {
-  const categories = siteData.menu.categories;
-  const additionalOptions = getAdditionalOptions();
   const visibleCategories = getVisibleCategories();
   const [active, setActive] = useState(visibleCategories[0]?.id || "");
   const selectedCategory = visibleCategories.find((category) => category.id === active);
