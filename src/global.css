@@ -18,6 +18,8 @@ html,
 body,
 #root {
   min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -2358,6 +2360,9 @@ footer span {
   flex-direction: column;
   align-items: flex-end;
   gap: 0.85rem;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .cart-backdrop {
@@ -3172,6 +3177,24 @@ footer span {
     left: auto;
     align-items: flex-end;
     z-index: 1200;
+    position: fixed;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .cart-float--mobile {
+    position: fixed !important;
+    bottom: 6rem !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    will-change: transform !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    -webkit-perspective: 1000 !important;
+    perspective: 1000 !important;
   }
 
   .cart-panel {
