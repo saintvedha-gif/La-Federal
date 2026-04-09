@@ -2081,6 +2081,12 @@ a {
   position: relative;
 }
 
+@media (max-width: 700px) {
+  .menu-container {
+    position: static;
+  }
+}
+
 .menu-container .section-inner {
   flex: 1;
 }
@@ -3179,11 +3185,6 @@ footer span {
     align-items: flex-end;
     z-index: 1200;
     position: fixed;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
   }
 
 
