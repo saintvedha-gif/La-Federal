@@ -19,7 +19,7 @@ export default function ProductDetail() {
   const { categoryId, productSlug } = useParams();
   const { category, product } = findProductBySlug(categoryId, productSlug);
   const additionalOptions = getAdditionalOptions();
-  const { addToCart, updateItemAdditions } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   const [selectedAdditions, setSelectedAdditions] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [addedOk, setAddedOk] = useState(false);

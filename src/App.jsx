@@ -35,22 +35,24 @@ function AnimatedRoutes() {
 }
 
 function AppContent() {
+  const location = useLocation();
   const cartMethods = useContext(CartContext);
+  const isMenuRoute = location.pathname === "/menu" || location.pathname.startsWith("/menu/");
 
   return (
     <>
-      <HashRouter>
-        <AnimatedRoutes />
-      </HashRouter>
+      <AnimatedRoutes />
       
-      <FloatingCart
-        cart={cartMethods.cart}
-        onAdd={cartMethods.addToCart}
-        onRemove={cartMethods.removeFromCart}
-        onDelete={cartMethods.deleteFromCart}
-        onClear={cartMethods.clearCart}
-        onUpdateAdditions={cartMethods.updateItemAdditions}
-      />
+      {isMenuRoute && (
+        <FloatingCart
+          cart={cartMethods.cart}
+          onAdd={cartMethods.addToCart}
+          onRemove={cartMethods.removeFromCart}
+          onDelete={cartMethods.deleteFromCart}
+          onClear={cartMethods.clearCart}
+          onUpdateAdditions={cartMethods.updateItemAdditions}
+        />
+      )}
     </>
   );
 }
@@ -58,7 +60,9 @@ function AppContent() {
 export default function App() {
   return (
     <CartProvider>
-      <AppContent />
+      <HashRouter>
+        <AppContent />
+      </HashRouter>
     </CartProvider>
   );
 }
