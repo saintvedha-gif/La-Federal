@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import FloatingCart from "../components/FloatingCart";
-import { useCart } from "../hooks/useCart";
+import { CartContext } from "../contexts/CartContext";
 import { useRevealAnimations } from "../hooks/useRevealAnimations";
 import {
   getAdditionalOptions,
@@ -20,7 +19,7 @@ export default function ProductDetail() {
   const { categoryId, productSlug } = useParams();
   const { category, product } = findProductBySlug(categoryId, productSlug);
   const additionalOptions = getAdditionalOptions();
-  const { cart, addToCart, removeFromCart, deleteFromCart, clearCart, updateItemAdditions } = useCart();
+  const { addToCart, updateItemAdditions } = useContext(CartContext);
   const [selectedAdditions, setSelectedAdditions] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [addedOk, setAddedOk] = useState(false);
@@ -168,14 +167,6 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      <FloatingCart
-        cart={cart}
-        onAdd={addToCart}
-        onRemove={removeFromCart}
-        onDelete={deleteFromCart}
-        onClear={clearCart}
-        onUpdateAdditions={updateItemAdditions}
-      />
       <Footer />
     </div>
   );

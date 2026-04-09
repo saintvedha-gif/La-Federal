@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import FloatingCart from "./components/FloatingCart";
+import { CartContext, CartProvider } from "./contexts/CartContext";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import About from "./pages/About";
@@ -32,10 +34,31 @@ function AnimatedRoutes() {
   );
 }
 
+function AppContent() {
+  const cartMethods = useContext(CartContext);
+
+  return (
+    <>
+      <HashRouter>
+        <AnimatedRoutes />
+      </HashRouter>
+      
+      <FloatingCart
+        cart={cartMethods.cart}
+        onAdd={cartMethods.addToCart}
+        onRemove={cartMethods.removeFromCart}
+        onDelete={cartMethods.deleteFromCart}
+        onClear={cartMethods.clearCart}
+        onUpdateAdditions={cartMethods.updateItemAdditions}
+      />
+    </>
+  );
+}
+
 export default function App() {
   return (
-    <HashRouter>
-      <AnimatedRoutes />
-    </HashRouter>
+    <CartProvider>
+      <AppContent />
+    </CartProvider>
   );
 }

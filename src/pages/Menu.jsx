@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { siteData } from "../data/siteData";
 import { useRevealAnimations } from "../hooks/useRevealAnimations";
-import FloatingCart from "../components/FloatingCart";
 import Footer from "../components/Footer";
-import { useCart } from "../hooks/useCart";
+import { CartContext } from "../contexts/CartContext";
 import Twemoji from "../components/Twemoji";
 import {
   getVisibleCategories,
@@ -25,7 +24,6 @@ export default function Menu() {
   const visibleCategories = getVisibleCategories();
   const [active, setActive] = useState(visibleCategories[0]?.id || "");
   const selectedCategory = visibleCategories.find((category) => category.id === active);
-  const { cart, addToCart, removeFromCart, deleteFromCart, clearCart, updateItemAdditions } = useCart();
   useRevealAnimations();
 
   return (
@@ -87,15 +85,6 @@ export default function Menu() {
       </main>
 
       <Footer />
-
-      <FloatingCart
-        cart={cart}
-        onAdd={addToCart}
-        onRemove={removeFromCart}
-        onDelete={deleteFromCart}
-        onClear={clearCart}
-        onUpdateAdditions={updateItemAdditions}
-      />
     </div>
   );
 }
