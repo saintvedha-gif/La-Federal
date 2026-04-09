@@ -2078,6 +2078,7 @@ a {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .menu-container .section-inner {
@@ -3172,7 +3173,7 @@ footer span {
   }
 
   .cart-float {
-    bottom: 6rem;
+    bottom: 7rem;
     right: 1rem;
     left: auto;
     align-items: flex-end;
@@ -3185,17 +3186,6 @@ footer span {
     backface-visibility: hidden;
   }
 
-  .cart-float--mobile {
-    position: fixed !important;
-    bottom: 6rem !important;
-    -webkit-transform: translate3d(0, 0, 0) !important;
-    transform: translate3d(0, 0, 0) !important;
-    will-change: transform !important;
-    -webkit-backface-visibility: hidden !important;
-    backface-visibility: hidden !important;
-    -webkit-perspective: 1000 !important;
-    perspective: 1000 !important;
-  }
 
   .cart-panel {
     width: min(360px, calc(100vw - 2rem));

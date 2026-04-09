@@ -7,52 +7,9 @@ function formatCOP(amount) {
 
 export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear, onUpdateAdditions }) {
   const [open, setOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const items = Object.values(cart).sort((a, b) => (a.addedAt || 0) - (b.addedAt || 0));
   const totalItems = items.reduce((s, i) => s + i.qty, 0);
   const totalPrice = items.reduce((s, i) => s + i.unitTotal * i.qty, 0);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const adjustCartPosition = () => {
-      const cartElement = document.querySelector('.cart-float');
-      if (cartElement && open) {
-        // Forzar repaint para mantener el position fixed
-        cartElement.style.transform = 'translateZ(0)';
-        setTimeout(() => {
-          cartElement.style.transform = '';
-        }, 10);
-      }
-    };
-
-    const handleScroll = () => {
-      adjustCartPosition();
-    };
-
-    const handleOrientationChange = () => {
-      setTimeout(adjustCartPosition, 100);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('orientationchange', handleOrientationChange);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('orientationchange', handleOrientationChange);
-    };
-  }, [isMobile, open]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -102,7 +59,7 @@ export default function FloatingCart({ cart, onAdd, onRemove, onDelete, onClear,
   }
 
   return (
-    <div className={`cart-float${isMobile ? ' cart-float--mobile' : ''}`}>
+    <div className="cart-float">
       {open && <button type="button" className="cart-backdrop" onClick={() => setOpen(false)} aria-label="Cerrar carrito" />}
       {open && (
         <div className="cart-panel" role="dialog" aria-modal="true" aria-label="Tu pedido">
